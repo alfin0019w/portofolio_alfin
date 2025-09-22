@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Muhammad Nusyaa Alfindy — Portofolio</title>
+  <meta name="description" content="Portofolio profesional — Muhammad Nusyaa Alfindy. Software Engineer / Web & Mobile Developer." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#4f46e5;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --maxw:1100px;
+      --txt:#e6eef8;
+      --header-height:72px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,var(--bg),#061022 60%);color:var(--txt);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+    a{color:inherit}
+    .container{max-width:var(--maxw);margin:32px auto;padding:24px}
+
+    /* Header */
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      position:sticky;top:0;z-index:50;
+      background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.45));
+      backdrop-filter: blur(6px);
+      padding:12px 24px;
+      height:var(--header-height);
+      transition:transform 0.28s ease, box-shadow .2s ease;
+    }
+    header.hidden{transform:translateY(-120%);box-shadow:none}
+    header.visible{transform:translateY(0)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 6px 20px rgba(79,70,229,0.15);color:white}
+    .brand h1{font-size:16px;margin:0}
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-size:14px}
+    nav a:hover{background:var(--glass);color:var(--txt)}
+    .btn-primary{background:var(--accent);color:white;padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+
+    /* make sections not hidden under sticky header when navigated */
+    section{scroll-margin-top:calc(var(--header-height) + 12px)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;margin-top:12px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:22px;box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .intro h2{margin:0 0 8px 0;font-size:24px}
+    .intro p{margin:0;color:var(--muted);line-height:1.5}
+    .cta{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
+
+    /* Sidebar */
+    .profile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+    .avatar{width:120px;height:120px;border-radius:16px;background:linear-gradient(135deg,#0ea5e9,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;color:white;box-shadow:0 8px 30px rgba(2,6,23,0.6);overflow:hidden}
+    
+    .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%; /* geser foto ke bawah */
+  border-radius: 16px;
+}
+    .meta{color:var(--muted);font-size:14px}
+
+    /* Sections */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border:1px solid rgba(255,255,255,0.02)}
+    .project h3{margin:0 0 6px 0;font-size:16px}
+    .project p{margin:0;color:var(--muted);font-size:13px}
+    .project .thumb{width:100%;height:140px;border-radius:10px;object-fit:cover;margin-bottom:10px;background:#081020;display:block}
+
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:999px;font-size:13px;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+
+    footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Contact */
+    #contact .grid-2{align-items:flex-start}
+    #contact .card{padding:18px}
+    form{display:flex;flex-direction:column;gap:10px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;color:var(--txt);resize:vertical}
+    input::placeholder, textarea::placeholder{color:rgba(255,255,255,0.35)}
+
+    /* responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      .projects{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      nav{display:none}
+      header{padding-left:16px;padding-right:16px}
+      .container{padding:16px}
+    }
+
+    /* micro animations */
+    .fade-up{transform:translateY(8px);opacity:0;animation:up .6s forwards ease-out}
+    @keyframes up{to{transform:none;opacity:1}}
+
+    /* helpers */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .link{color:var(--accent);text-decoration:none}
+    .row{display:flex;gap:12px}
+    .row .col{flex:1}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header id="navbar" class="visible">
+      <div class="brand">
+        <div class="logo">MNA</div>
+        <div>
+          <h1>Muhammad Nusyaa Alfindy</h1>
+          <div style="font-size:12px;color:var(--muted)">Software Engineer • Web & Mobile</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#profil">Profil</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Pengalaman</a>
+        <a class="btn-primary" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO / PROFILE -->
+    <section id="profil" class="hero fade-up" aria-label="Profil">
+      <div class="card intro">
+        <h2>Halo, saya <span id="display-name">Muhammad Nusyaa Alfindy</span>.</h2>
+        <p>Saya lulusan <strong>SMK 17 Agustus 1945 Surabaya</strong> jurusan Rekayasa Perangkat Lunak, dengan minat di pengembangan web dan mobile. Berpengalaman magang sebagai developer dengan fokus pada <strong>HTML, CSS, JavaScript</strong>, dan <strong>WordPress</strong>. Siap terus belajar dan berkembang di lingkungan teknologi seperti <em>IUKM Coder Telkom University</em>.</p>
+
+        <div class="cta">
+          <a href="#projects" class="btn-primary">Lihat Project</a>
+          <a href="Alfin_CV.pdf" download style="padding:8px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);text-decoration:none;color:var(--muted)">Download CV</a>
+        </div>
+
+        <div class="grid-2">
+          <div class="card" style="background:transparent;padding:14px">
+            <h4 style="margin:0 0 6px 0">Availability</h4>
+            <p class="meta">Open to freelance & full-time — based in Surabaya, Indonesia</p>
+          </div>
+          <div class="card" style="background:transparent;padding:14px">
+            <h4 style="margin:0 0 6px 0">Contact</h4>
+            <p class="meta">samlufias@gmail.com • +62-895413938230</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card profile" aria-label="Sidebar profil">
+        <div class="avatar" id="avatar">
+            <img src="images/profile2.jpeg" alt="Foto Muhammad Nusyaa Alfindy">
+        </div>
+        <h3 style="margin:6px 0 0 0">Muhammad Nusyaa Alfindy</h3>
+        <div class="meta">Software Engineer</div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px">Membuat antarmuka web & mobile yang cepat dan responsif. Berpengalaman membangun sistem CRUD, integrasi WordPress, dan landing page.</div>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <a href="#projects" style="padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.02);text-decoration:none;color:var(--muted);font-size:14px">Portfolio</a>
+          <a href="#contact" class="btn-primary">Hire me</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="fade-up" style="margin-top:18px">
+      <h3 style="margin:0 0 12px 0">Projects</h3>
+
+     <div class="projects-grid">
+  <article class="project card" aria-label="Project 1">
+    <img class="thumb" src="images/spp.png" alt="CRUD Laravel — thumbnail" />
+    <h3>CRUD PHP — Sistem SPP</h3>
+    <p>
+      Mengembangkan aplikasi CRUD untuk manajemen data siswa lengkap dengan fitur export ke PDF & Excel, serta autentikasi dasar.
+      <span class="muted small">Tech: Laravel, Blade, MySQL</span>
+    </p>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <a href="#" class="link small">Belum di Hosting</a>
+    </div>
+  </article>
+
+  <article class="project card" aria-label="Project 3">
+    <img class="thumb" src="images/smf.jpeg" alt="Landing Page WordPress — thumbnail" />
+    <h3>Landing Page — WordPress Company Profile</h3>
+    <p>
+      Mendesain dan mengimplementasikan landing page responsif untuk company profile menggunakan WordPress dengan custom theme dan plugin ringan.
+      <span class="muted small">Tech: WordPress, PHP, CSS</span>
+    </p>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <a href="https://smfkupang.com/" class="link small">Lihat demo</a>
+    </div>
+  </article>
+
+  <article class="project card" aria-label="Project 4">
+    <img class="thumb" src="images/ecomerce.jpeg" alt="Mini App — thumbnail" />
+    <h3>Mini Web App — Frontend Prototype</h3>
+    <p>
+      Prototype aplikasi web mobile sederhana (UI + interaksi) untuk presentasi produk.
+      <span class="muted small">Tech: HTML/CSS/JS</span>
+    </p>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <a href="#" class="link small">Belum di Hosting</a>
+    </div>
+  </article>
+</div>
+
+
+    <!-- SKILLS -->
+    <section id="skills" class="fade-up" style="margin-top:18px">
+      <h3 style="margin:0 0 12px 0">Kemampuan</h3>
+      <div class="card" style="padding:16px">
+        <div class="skills">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">PHP (basic)</span>
+          <span class="chip">WordPress</span>
+          <span class="chip">Responsive Design</span>
+          <span class="chip">Git & GitHub</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="fade-up" style="margin-top:18px">
+      <h3 style="margin:0 0 12px 0">Pengalaman</h3>
+      <div class="card" style="padding:16px">
+        <h4 style="margin:0">PT Mitrajual Indonesia Jaya</h4>
+        <div class="muted small">Web Developer Mobile (Magang) — Jan 2024 – Mar 2024</div>
+        <ul style="margin-top:8px">
+          <li>Mengembangkan aplikasi web mobile (HTML, CSS, JS).</li>
+          <li>Integrasi antarmuka dengan PHP (basic).</li>
+          <li>Kolaborasi tim menggunakan metode agile.</li>
+        </ul>
+
+        <h4 style="margin-top:14px">GSmart IT Solutions</h4>
+        <div class="muted small">Web Mobile Developer – WordPress (Magang) — Juni – Juli 2024</div>
+        <ul style="margin-top:8px">
+          <li>Menyusun data peserta kegiatan sekolah secara terperinci.</li>
+          <li>Mengatur logistik dan kebutuhan administrasi selama acara berlangsung.</li>
+          <li>Berhasil menyelesaikan tugas tepat waktu dengan tingkat akurasi tinggi.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="fade-up" style="margin-top:18px">
+      <h3 style="margin:0 0 12px 0">Pendidikan</h3>
+      <div class="card" style="padding:16px">
+        <p><strong>SMK 17 Agustus 1945 Surabaya</strong> — Jurusan Rekayasa Perangkat Lunak | 2023</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="fade-up" style="margin-top:18px">
+      <h3 style="margin:0 0 12px 0">Kontak</h3>
+      <div class="grid-2">
+        <!-- Info kontak -->
+        <div class="card" aria-label="Informasi kontak">
+          <p><strong>Telepon:</strong><br>
+            <a href="tel:+62895413938230" class="link">+62-895413938230</a></p>
+          <p><strong>Email:</strong><br>
+            <a href="mailto:samlufias@gmail.com" class="link">samlufias@gmail.com</a></p>
+          <p><strong>Website:</strong><br>
+            <a href="https://github.com/alfin0019w/portofolio" class="link" target="_blank" rel="noopener">GitHub</a></p>
+          <p><strong>Alamat:</strong><br>
+            <span class="muted small">Jl. Kutisari Selatan no 20, Surabaya</span></p>
+        </div>
+
+        <!-- Form kontak -->
+        <div class="card" aria-label="Form kontak">
+          <form id="contact-form" aria-label="Form kontak demo">
+            <div class="row">
+              <div class="col"><input type="text" id="name" placeholder="Nama lengkap" required /></div>
+              <div class="col"><input type="email" id="email" placeholder="Email" required /></div>
+            </div>
+            <input type="text" id="subject" placeholder="Subjek" />
+            <textarea id="message" rows="5" placeholder="Tulis pesanmu..." required></textarea>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="color:var(--muted);font-size:13px">Atau: <a class="link" href="mailto:samlufias@gmail.com">samlufias@gmail.com</a></div>
+              <button type="submit" class="btn-primary">Kirim pesan</button>
+            </div>
+          </form>
+          <div id="form-msg" style="color:lightgreen;display:none;margin-top:10px">Pesan terkirim! Saya akan menghubungi secepatnya.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="fade-up">© <span id="year"></span> Muhammad Nusyaa Alfindy — Built with HTML/CSS/JS</footer>
+  </div>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // contact form demo (simple UX)
+    const form = document.getElementById('contact-form');
+    const msg = document.getElementById('form-msg');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name || !email || !message){
+        alert('Isi semua field yang wajib.');
+        return;
+      }
+      msg.style.display = 'block';
+      form.reset();
+      setTimeout(()=> msg.style.display = 'none', 4500);
+    });
+
+    // smooth scroll anchors (fallback)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',(ev)=>{
+        const id = a.getAttribute('href');
+        if(!id || id === '#') return;
+        const el = document.querySelector(id);
+        if(el){
+          ev.preventDefault();
+          el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      })
+    });
+
+    // avatar: attempt to load images/profile.jpg, fallback keep initials
+    (function(){
+      const avatarEl = document.getElementById('avatar');
+      const initialsEl = document.getElementById('avatar-initials');
+      if(!avatarEl) return;
+      const img = new Image();
+      img.src = 'images/profile.jpg';
+      img.alt = 'Foto Muhammad Nusyaa Alfindy';
+      img.onload = ()=> {
+        avatarEl.innerHTML = '';
+        avatarEl.appendChild(img);
+      };
+      img.onerror = ()=> {
+        // keep initials (MN)
+      };
+    })();
+
+    // theme toggle via "t"
+    let dark = true;
+    document.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase()==='t'){
+        dark = !dark;
+        if(!dark){
+          document.documentElement.style.setProperty('--bg','#f6f8fb');
+          document.documentElement.style.setProperty('--card','#ffffff');
+          document.documentElement.style.setProperty('--txt','#071127');
+          document.documentElement.style.setProperty('--muted','#475569');
+          document.documentElement.style.setProperty('--accent','#2563eb');
+        } else {
+          document.documentElement.style.setProperty('--bg','#0f1724');
+          document.documentElement.style.setProperty('--card','#0b1220');
+          document.documentElement.style.setProperty('--txt','#e6eef8');
+          document.documentElement.style.setProperty('--muted','#9aa4b2');
+          document.documentElement.style.setProperty('--accent','#4f46e5');
+        }
+      }
+    });
+
+    // NAVBAR AUTO HIDE on scroll down, show on scroll up
+    (function(){
+      const navbar = document.getElementById('navbar');
+      let lastScroll = window.scrollY;
+      let ticking = false;
+      window.addEventListener('scroll', ()=>{
+        if(ticking) return;
+        window.requestAnimationFrame(()=>{
+          const current = window.scrollY;
+          const threshold = 60; // minimum scroll before hiding
+          if(current > lastScroll && current > threshold){
+            // scrolling down
+            navbar.classList.add('hidden');
+            navbar.classList.remove('visible');
+          } else {
+            // scrolling up
+            navbar.classList.remove('hidden');
+            navbar.classList.add('visible');
+          }
+          lastScroll = current <= 0 ? 0 : current;
+          ticking = false;
+        });
+        ticking = true;
+      });
+    })();
+  </script>
+</body>
+</html>
