@@ -1,4 +1,5 @@
 import React from 'react';
+import AlfinPhoto from '../app/Alfin.jpeg';
 
 const Hero = () => {
   return (
@@ -19,8 +20,13 @@ const Hero = () => {
 
           <div className="hero-visual reveal active">
             <div className="image-wrapper">
-              <img src="https://images.unsplash.com/photo-1527010154944-f2241763d806?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG9zZSUyMHByaWElMjBrZXJlbnxlbnwwfHwwfHx8MA%3D%3D" alt="Alfin Portrait" />
-              
+              <img
+                src={AlfinPhoto.src ?? AlfinPhoto}
+                alt="Alfin Portrait"
+                width={600}
+                height={800}
+              />
+
               <div className="social-links">
                 <a href="#"><i className="fa-brands fa-instagram"></i></a>
                 <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
